@@ -92,5 +92,10 @@ public class ClientController extends ResponseAdvise{
 	public ResponseEntity<List<ClientDto>> consultarClientesActivos() {		
 		return new ResponseEntity<>(clientService.consultarClientesActivos(),HttpStatus.OK);	    	
 	}
+
+		  @GetMapping("/client/api-docs")
+	    public String redirectToSwagger() {
+	        return "redirect:/client/swagger-ui.html";
+	    }
 	
 }
