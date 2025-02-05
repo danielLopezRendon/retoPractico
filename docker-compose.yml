@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  cliente-app:
+    build: .
+    container_name: cliente-container
+    ports:
+      - "9122:9122"
+    environment:
+      - SPRING_PROFILES_ACTIVE=default
+      - SPRING_DATASOURCE_URL=jdbc:oracle:thin:@ #Se debe diligenciar los parametros de la bd
+      - SPRING_DATASOURCE_USERNAME= #****
+      - SPRING_DATASOURCE_PASSWORD= #****
+    depends_on:
+      - db
+    restart: always
+
+  db:
+    image: sath89/oracle-11g  
+    container_name: oracle-container
+    ports:
+      - "1521:1521"  
+    environment:
+      - ORACLE_ALLOW_REMOTE=true
+    volumes:
+      - oracle_data:/u01/app/oracle
+    restart: always
+
+volumes:
+  oracle_data:
