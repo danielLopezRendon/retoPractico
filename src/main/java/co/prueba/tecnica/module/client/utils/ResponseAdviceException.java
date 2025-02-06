@@ -182,16 +182,7 @@ public class ResponseAdviceException  extends ResponseEntityExceptionHandler{
         		null);
         return new ResponseEntity<>(ecosystemError, new HttpHeaders(), ecosystemError.getStatus());
     }    
-    
-    /**
-     * Handle smart api builder exception.
-     *
-     * @author Carlos Torres - carlos.torres@ada.co
-     * @version 0.0.8
-     * @param ex the ex
-     * @param request the request
-     * @return the response entity
-     */
+
     @ExceptionHandler({ EcosystemException.class })
     public ResponseEntity<Object> handleEcosystemExceptionException(final EcosystemException ex, final WebRequest request) {        
         final EcosystemError ecosystemError = new EcosystemError(HttpStatus.INTERNAL_SERVER_ERROR, 
@@ -201,15 +192,7 @@ public class ResponseAdviceException  extends ResponseEntityExceptionHandler{
         return new ResponseEntity<>(ecosystemError, new HttpHeaders(), ecosystemError.getStatus());
     }    
 
-    /**
-     * Handle all.
-     *
-     * @author Carlos Torres - carlos.torres@ada.co
-     * @version 0.0.8
-     * @param ex the ex
-     * @param request the request
-     * @return the response entity
-     */
+   
     @ExceptionHandler({ Exception.class })
     public ResponseEntity<Object> handleAll(final Exception ex, final WebRequest request) {
     	 final List<String> errors = new ArrayList<>();
