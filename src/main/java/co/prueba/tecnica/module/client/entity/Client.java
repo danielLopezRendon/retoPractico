@@ -17,12 +17,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="CLIENT",schema = "TEST")
+@Table(name="CLIENT")
 public class Client {
 	
-	 @Id
-	   @GeneratedValue(strategy =GenerationType.SEQUENCE,generator = "TEST.SEQ_CLIENT")
-	   @SequenceGenerator(name="TEST.SEQ_CLIENT",sequenceName = "TEST.SEQ_CLIENT",allocationSize = 1)
+	    @Id
 	    @Column(name = "ID_CLIENT", nullable = false)
 	    private Long idClient;
 
