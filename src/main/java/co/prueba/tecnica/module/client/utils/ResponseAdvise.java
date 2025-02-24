@@ -13,14 +13,24 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 public class ResponseAdvise extends ResponseAdviceException implements ResponseBodyAdvice<Object> {
 
 	private Boolean openAPI=false;
+
+
+
 	@Override
-	public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
-		if(returnType.getMethod().getName().equalsIgnoreCase("openapiJson")) {
-			openAPI=true;
-			return false;
-		}
-		return true;
-	}
+public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
+    String methodName = returnType.getMethod().getName();
+    String className = returnType.getContainingClass().getSimpleName();
+
+    // Evitar que Swagger sea interceptado
+    if (methodName.equalsIgnoreCase("openapiJson") || 
+        className.equalsIgnoreCase("OpenApiResource") || 
+        className.toLowerCase().contains("swagger")) {
+        openAPI = true;
+        return false;
+    }
+
+    return true;
+}
 
 	@Override
     public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType,

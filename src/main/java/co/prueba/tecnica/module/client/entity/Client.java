@@ -21,6 +21,8 @@ import lombok.NoArgsConstructor;
 public class Client {
 	
 	    @Id
+		@GeneratedValue(strategy =GenerationType.SEQUENCE,generator = "SEQ_CLIENT")
+	   @SequenceGenerator(name="SEQ_CLIENT",sequenceName = "SEQ_CLIENT",allocationSize = 1)
 	    @Column(name = "ID_CLIENT", nullable = false)
 	    private Long idClient;
 
